@@ -102,6 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'userena.middleware.UserenaLocaleMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -113,6 +114,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 ROOT_URLCONF = 'urls'
 
@@ -131,13 +140,33 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_twilio',
-#    'pinax_theme_bootstrap',
-    'callforme',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+#    'pinax_theme_bootstrap',
+    'callforme',
+    'profiles',
+    # these are needed for django-userena
+    'guardian',
+    'easy_thumbnails',
+    'userena',
+    'userena.contrib.umessages',
+    # South is used for database schema migrations
+    'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+# Userena settings
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+AUTH_PROFILE_MODULE = 'profiles.Profile'
+
+USERENA_DISABLE_PROFILE_LIST = True
+USERENA_MUGSHOT_SIZE = 140
+
+# Guardian
+ANONYMOUS_USER_ID = -1
 
 # Twilio settings
 # add these to a local_settings.py file so that they are protected from 

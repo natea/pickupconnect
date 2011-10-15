@@ -31,6 +31,8 @@ To run the tests::
 Resources
 =========
 
+* `django-socialauth  <http://agiliq.com/blog/2009/08/django-socialauth-login-via-twitter-facebook-openi/>`_ Login via Facebook, Twitter, Google, etc.
+
 Packages
 --------
 
