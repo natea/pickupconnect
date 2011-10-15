@@ -20,9 +20,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
 #    url(r'^$', 'django_twilio.views.say', {'text': message}),
-    url(r'^testsms/$', 'callme.views.testsms'),
-    url(r'^sms/$', 'callme.views.twilio_sms'),
-    url(r'^call/$', 'callme.views.twilio_call')
+    url(r'^testsms/$', 'callforme.views.testsms'),
+    url(r'^sms/$', 'callforme.views.twilio_sms'),
+    url(r'^call/$', 'callforme.views.twilio_call')
     # url(r'^$', 'django_twilio.views.conference', {
     #     'name': 'conf1',
     #     'wait_url': 'http://twimlets.com/holdmusic?Bucket=com.twilio.music.rock',
