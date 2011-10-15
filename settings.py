@@ -1,4 +1,6 @@
 # Django settings for hubbing project.
+STATIC_URL = '/statics'
+STATIC_ROOT = '/'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
