@@ -1,13 +1,9 @@
 Django==1.3.1
 -e git+git://github.com/sarumont/django-twilio.git#egg=django-twilio
-
-
-
-
-
 # this one doesn't work because it's designed for an older version of the Twilio API
 #-e git+git://github.com/rdegges/django-twilio.git#egg=django-twilio
--e git+git://github.com/pinax/pinax-theme-bootstrap.git#egg=pinax-theme-bootstrap
-django-tastypie==0.9.9
+#-e git+git://github.com/pinax/pinax-theme-bootstrap.git#egg=pinax-theme-bootstrap
+# Use tastypie to build a backend API
+#django-tastypie==0.9.9
 nose==1.1.2
 ipdb==0.6
