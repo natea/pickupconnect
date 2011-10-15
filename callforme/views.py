@@ -39,3 +39,16 @@ def twilio_call(request):
     return call
     # print call.length
     # print call.sid
+
+def twilio_verify(request):
+    """ Verify a user's phone with Twilio """
+    client = TwilioRestClient(account, token)
+    
+    #validation = client.callerids.validate("""PHONE NUMBER""")
+    
+    validation = {'validation_code' : "613332"}
+    
+    return render_to_response('validation.html',
+                             {'validation_code' : validation['validation_code']},
+                             RequestContext(request))
+
