@@ -39,3 +39,6 @@ def twilio_call(request):
     return call
     # print call.length
     # print call.sid
+
+def home(request):
+    return render_to_response("index.html")
