@@ -52,3 +52,5 @@ def twilio_verify(request):
                              {'validation_code' : validation['validation_code']},
                              RequestContext(request))
 
+def home(request):
+    return render_to_response("index.html")
