@@ -5,8 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 message = """
-Hello, Hubspot Hackers! I hope you are having a good time so far at
-the Hackathon! Goodbye.
+This is a test.
 """
 
 urlpatterns = patterns('',
@@ -21,9 +20,9 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
 #    url(r'^$', 'django_twilio.views.say', {'text': message}),
-    url(r'^testsms/$', 'hubtext.views.testsms'),
-    url(r'^sms/$', 'hubtext.views.twilio_sms'),
-    url(r'^call/$', 'hubtext.views.twilio_call')
+    url(r'^testsms/$', 'callme.views.testsms'),
+    url(r'^sms/$', 'callme.views.twilio_sms'),
+    url(r'^call/$', 'callme.views.twilio_call')
     # url(r'^$', 'django_twilio.views.conference', {
     #     'name': 'conf1',
     #     'wait_url': 'http://twimlets.com/holdmusic?Bucket=com.twilio.music.rock',
