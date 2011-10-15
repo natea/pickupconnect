@@ -5,7 +5,15 @@ This is an app to call people who are important to you.
 
 To install this app (assuming you are on Mac or Linux)::
 
+    $ curl -O http://python-distribute.org/distribute_setup.py
+    $ python distribute_setup.py
+
+Or if you have easy_install on your machine (don't do this if you did the above)::
+
     $ sudo easy_install pip
+    
+Then create the virtualenv::
+
     $ sudo pip install virtualenv
     $ virtualenv keepintouch
     $ cd keepintouch
