@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 
 from userena import views as userena_views
 from callforme import forms as callforme_forms
+from callforme import views as callforme_views
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -18,11 +19,14 @@ This is a test.
 urlpatterns = patterns('',
     # Examples:
     # 
-    url(r'^$', 'callforme.views.home', name='home'),
-    url(r'^promo/$',
-        direct_to_template,
-        {'template': 'promo.html'},
-        name='promo'),
+    url(r'^$', direct_to_template,
+        {'template': 'index.html'}, name='home'),  
+    url(r'^contacts/', 'callforme.views.contacts'),
+
+#url(r'^promo/$',
+    #    direct_to_template,
+    #    {'template': 'promo.html'},
+    #    name='promo'),
     # url(r'^hubbing/', include('hubbing.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

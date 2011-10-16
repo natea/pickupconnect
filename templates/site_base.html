@@ -8,12 +8,17 @@
 
 {% block nav %}
 <ul class="nav">
+	{% if user.is_authenticated %}
         <li {% ifequal section "contacts" %} class="active" {% endifequal %}>
             <a href="/contacts">Contacts</a>
         </li>
+<!--Removing settings until we make it
         <li {% ifequal section "settings" %} class="active" {% endifequal %}>
             <a href="/settings">Settings</a>
-        </li>
+        </li>-->
+        {% endif %}
+
+
         <li {% ifequal section "about" %} class="active" {% endifequal %}>
             <a href="/about">About</a>
         </li>
