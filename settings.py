@@ -179,8 +179,8 @@ ANONYMOUS_USER_ID = -1
 # prying eyes in the public Github repo
 #  django-twilio account credentials. These fields are required to use the REST
 # API (initiate outbound calls and SMS messages).
-TWILIO_ACCOUNT_SID = 'xxx'
-TWILIO_AUTH_TOKEN = 'xxx'
+TWILIO_ACCOUNT_SID = 'AC7fac3d7f2bc5e23ea9f8f43d87eef41e'
+TWILIO_AUTH_TOKEN = 'a3d8b35fd0ff900797c62ccff3170cee'
 
 # The default callerid will be used for all outgoing phone calls and SMS
 # messages if not explicitly specified. This number must be previously
