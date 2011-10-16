@@ -49,11 +49,11 @@ def twilio_call(request):
     
 #    print str(contact_phone)
     
-    call = client.calls.create(to="+16175174953", from_="+16175000768",
+    call = client.calls.create(to="+15083040360", from_="+16175000768",
                                url="http://teddywing.com/twilio_da.xml")
     
     # Steve: 6172901329
-    # John: 6262721760
+    # John: 6262721760  #6175174953
     
     # print call.length
     # print call.sid
