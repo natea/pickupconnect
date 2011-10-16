@@ -3,20 +3,25 @@ from django.contrib.auth.models import User
  
 
 class Contact(models.Model):
-	user = models.ForeignKey(User)
-	name = models.CharField(max_length = 200)
-	phone = models.CharField(max_length = 200)
-	birthday = models.DateField()
-
-	FREQUENCY_CHOICES = (
-		('W', 'Weekly'),
-	        ('B', 'Bi-weekly'),
-		('M', 'Monthly'),
-    	)
-	frequency = models.CharField(max_length=1, choices=FREQUENCY_CHOICES)
+    user = models.ForeignKey(User)
+    name = models.CharField(max_length = 200)
+    phone = models.CharField(
+        max_length = 200, 
+        verbose_name="Phone number",
+        help_text="Enter your phone number as in (555) 555-1212",
+        ),
+    birthday = models.DateField()
+    twitter = models.CharField(max_length=255, blank=True, null=True)
+    
+    FREQUENCY_CHOICES = (
+        ('W', 'Weekly'),
+        ('B', 'Bi-weekly'),
+        ('M', 'Monthly'),
+        )
+    frequency = models.CharField(max_length=1, choices=FREQUENCY_CHOICES)
 
 class Call(models.Model):
-	user = models.ForeignKey(User)
-	contact = models.ForeignKey(Contact)
-	time = models.DateTimeField(auto_now_add = True)
+    user = models.ForeignKey(User)
+    contact = models.ForeignKey(Contact)
+    time = models.DateTimeField(auto_now_add = True)
    
