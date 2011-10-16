@@ -71,3 +71,4 @@ def home(request):
         return render_to_response("index.html")
     else:
         return render_to_response("accounts/signin/")
+
