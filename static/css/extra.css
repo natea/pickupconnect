@@ -1,0 +1,16 @@
+/* put your CSS overrides below */
+
+body {
+  background-color: #fff;
+  position: relative;
+  padding-top: 80px;
+}
+section {
+  padding-top: 60px;
+}
+.modal form {
+  margin-bottom: 0px;
+}
+
+/* override django-famfam default */
+.icon { vertical-align: middle; margin-right: 3px;}
