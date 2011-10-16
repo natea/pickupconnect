@@ -46,7 +46,7 @@ urlpatterns = patterns('',
 #    url(r'^$', 'django_twilio.views.say', {'text': message}),
     url(r'^testsms/$', 'callforme.views.testsms'),
     url(r'^sms/$', 'callforme.views.twilio_sms'),
-    url(r'^call/$', 'callforme.views.twilio_call'),
+    url(r'^call/$', 'callforme.views.twilio_call', name="call"),
     url(r'^verify\-phone/$', 'callforme.views.twilio_verify'),
     url(r'^twiml\-response/$', 'callforme.views.twiml_response'),
     
