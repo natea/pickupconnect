@@ -41,4 +41,5 @@ def twilio_call(request):
     # print call.sid
 
 def home(request):
-    return render_to_response("index.html")
+    return render_to_response('index.html',
+                              context_instance=RequestContext(request))
