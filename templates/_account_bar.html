@@ -3,7 +3,7 @@
         <li>
             <a href="#" class="menu">{{ user }}</a>
             <ul class="menu-dropdown">
-                <li><a href="{% url userena_profile %}">Account</a></li>
+                <li><a href="{% url userena_profile_detail %}">Account</a></li>
                 {% if user.is_staff %}
                     <li><a href="/admin/">Admin</a></li>
                 {% endif %}
