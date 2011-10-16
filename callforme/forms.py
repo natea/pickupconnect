@@ -1,8 +1,12 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from userena.forms import SignupFormOnlyEmail
+from django.contrib.auth.models import User
+from django.utils.hashcompat import sha_constructor
 
+from userena.forms import SignupFormOnlyEmail
 from profiles.models import Profile
+ 
+import random
 
 attrs_dict = {'class': 'required'}
 
