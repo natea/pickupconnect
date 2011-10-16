@@ -25,6 +25,7 @@ Then create the virtualenv::
     (dialassist)$ cd callme
     (dialassist)$ pip install -r requirements.txt
     (dialassist)$ python manage.py syncdb
+    (dialassist)$ python collectstatic -l
     (dialassist)$ python manage.py runserver
     
 Running tests
