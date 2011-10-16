@@ -1,16 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django.forms.extras.widgets import SelectDateWidget
 
 class Contact(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length = 200)
-    phone = models.CharField(
-        max_length = 200, 
-        verbose_name="Phone number",
-        help_text="Enter your phone number as in (555) 555-1212",
-        ),
-    birthday = models.DateField()
+    phone = models.CharField(max_length = 200)
+    birthday = models.DateField(blank=True, null=True)
     twitter = models.CharField(max_length=255, blank=True, null=True)
     
     FREQUENCY_CHOICES = (
