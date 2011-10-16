@@ -66,6 +66,7 @@ Thanks to `Rob Spectre <http://brooklynhacker.com>`_ from Twilio for answering a
 * `django-twilio <https://github.com/rdegges/django-twilio>`_  
 * `django-twilio docs <http://django-twilio.readthedocs.org/en/latest/>`_
 * `django-door <https://github.com/sunlightlabs/door-django/>`_ integrating Django with Twilio
+* `django-twilio-utils <https://github.com/bnmrrs/django-twilio-utils>`_
 
 Design
 ------
