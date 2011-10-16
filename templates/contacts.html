@@ -17,17 +17,15 @@ My contacts
           {% if contact_list %}
           <table class="zebra-striped" id="projectsTable">
             <thead>
-                <tr><th>Contact</th><th>Phone number</th><th>Birthday</th><th>Last contacted</th></tr>
+                <tr><th>Contact</th><th>Phone number</th><th>Birthday</th><th>Frequency</th></tr>
             </thead>
             <tbody>
             {% for c in contact_list %}
             <tr>
                 <td><a href="{% url contact contact_id=c.id %}">{% famfam_silk 'user' %} {{c.name}}</a></td>
                 <td>{{ c.phone }}</td>
-                <td>{% if c.is_birthday == True %}<span label="success"><font color="red">Birthday soon!</font>{% endif %}</span>
-                {{ c.birthday }}
-                    </td>
-                <td>{{ c.last_contacted }}</td>
+                <td>{{ c.birthday }}</td>
+                <td>{{ c.frequency }}</td>
             </tr>
             {% endfor %}
             </tbody>
