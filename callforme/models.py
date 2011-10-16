@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
- 
+from django.forms import ModelForm
 
 class Contact(models.Model):
     user = models.ForeignKey(User)
@@ -20,6 +20,11 @@ class Contact(models.Model):
         )
     frequency = models.CharField(max_length=1, choices=FREQUENCY_CHOICES)
 
+class ContactForm(ModelForm):
+    class Meta:
+        model = Contact
+#        fields = ('name', 'phone', 'birthday', 'frequency')
+        
 class Call(models.Model):
     user = models.ForeignKey(User)
     contact = models.ForeignKey(Contact)

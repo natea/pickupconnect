@@ -8,6 +8,7 @@ from userena.forms import SignupFormOnlyEmail
 from userena.models import UserenaSignup
 
 from profiles.models import Profile
+from models import Contact
  
 import random
 
@@ -36,8 +37,6 @@ class SignupFormCustomized(SignupFormOnlyEmail):
             try:
                 User.objects.get(username__iexact=username)
             except User.DoesNotExist: break
-
-        #return super(SignupFormCustomized, self).save()
 
         username, email, password, phone = (username,
                                      self.cleaned_data['email'],
