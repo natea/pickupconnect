@@ -13,7 +13,11 @@ This is a test.
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'callforme.views.home', name='home'),
+    url(r'^$',
+        direct_to_template,
+        {'template': 'index.html'},
+        name='promo'),
+    #url(r'^$', 'callforme.views.home', name='home'),
     # url(r'^hubbing/', include('hubbing.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

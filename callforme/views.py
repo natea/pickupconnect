@@ -42,3 +42,8 @@ def twilio_call(request):
 
 def home(request):
     return render_to_response("index.html")
+    #fix this later. this line should never be reached
+    if signed_in:
+        return render_to_response("index.html")
+    else:
+        return render_to_response("accounts/signin/")
