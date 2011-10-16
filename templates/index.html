@@ -8,11 +8,33 @@
   <!-- Main hero unit for a primary marketing message or call to action -->
   {% if not user.is_authenticated %}
 
-  <div class="hero-unit">
-    <h1>Stay in touch!</h1>
-    <p>We want to help you you stay in touch.  Register, teach us about your contacts and we'll call you with gentle reminders about all those phone calls you've been procrastinating.  With you're premission, we'll even automatically bring your buddy on the line.  So what are you waiting for?</p>
-    <p><a class="btn primary large" href="/accounts/signup">Sign up<!--&raquo;--></a> or <a class="btn primary large" href="/accounts/signin/">Sign in</a></p>
-  </div>
+<div class="hero-unit">
+<div class="container">
+    <div class="row">
+        <div class="span8">
+                <h1>
+                    Stay in touch!
+                </h1>
+                <p>
+                    We want to help you you stay in touch. Register, teach us about your contacts and we'll call you with gentle reminders about all those phone calls you've been procrastinating. With you're premission, we'll even automatically bring your buddy on the line. So what are you waiting for?
+                </p>
+                <p>
+                    <a class="btn primary large" href="/accounts/signup">Sign up<!--&raquo;--></a> or <a class="btn primary large" href="/accounts/signin/">Sign in</a>
+                </p>
+        </div>
+        <div class="span8">
+            <object width="400" height="258">
+                <param name="movie" value="http://goanimate.com/player/swf/0xTSrvCmBuNM">
+                <param name="bgcolor" value="#000000">
+                <param name="allowFullScreen" value="true">
+                <param name="allowscriptaccess" value="always">
+                <embed src="http://goanimate.com/player/swf/0xTSrvCmBuNM?autostart=0" type="application/x-shockwave-flash" width="400" height="258" bgcolor="#000000" allowscriptaccess="always" allowfullscreen="true">
+            </object><br>
+        </div>
+    </div>
+</div>
+</div>
+
   {% else %}
   <div class="row">
     <div class = "span4">
