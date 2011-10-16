@@ -11,7 +11,7 @@ class SignupFormCustomized(SignupForm):
     phone = forms.CharField(
         help_text=Profile._meta.get_field("phone").help_text,
         label=Profile._meta.get_field("phone").verbose_name,
-        initial=Profile._meta.get_field("phone").default,
+#        initial=Profile._meta.get_field("phone").default,
 #        validators=...
         required=True,
     )
