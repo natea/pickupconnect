@@ -1,19 +1,21 @@
+{% load i18n %}
 <ul class="secondary-nav">
+    <li>
     {% if user.is_authenticated %}
-        <li>
-            <a href="#" class="menu">{{ user }}</a>
-            <ul class="menu-dropdown">
-                <li><a href="{% url userena_profile_detail %}">Account</a></li>
-                {% if user.is_staff %}
-                    <li><a href="/admin/">Admin</a></li>
-                {% endif %}
-                <li class="divider"></li>
-                <li><a href="{% url userena_signout %}">Logout</a></li>
-            </ul>
-        </li>
+        <a href="#" class="menu">{{ user }}</a>
+        <ul class="menu-dropdown">
+            {% if user.is_staff %}
+                <li><a href="/admin/">Admin</a></li>
+                <li><a href="{% url userena_profile_list %}"><span>{% trans 'All profiles' %}</span></a></li>
+                <li><a href="{% url userena_umessages_list %}"><span>{% trans 'Messages' %}</span></a></li>
+            {% endif %}            
+            
+            <li><a href="{% url userena_profile_detail user.username %}"><span>{% trans 'Account' %} ({{ user.username }})</span></a></li>
+            <li class="divider"></li>
+            <li><a href="{% url userena_signout %}"><span>{% trans 'Signout' %}</span></a></li>
+        </ul>
     {% else %}
-        <li><a href="{% url userena_signin %}">Log In</a></li>
-        <li><p>or</p></li>
-        <li><a href="{% url userena_signup %}">Sign Up</a></li>
+    <li><a href="{% url userena_signin %}"><span>{% trans 'Log in' %}</span></a></li>
+    <li><a href="{% url userena_signup %}"><span>{% trans 'Sign up' %}</span></a></li>
     {% endif %}
 </ul>

@@ -8,6 +8,7 @@ django-debug-toolbar
 # see all the icons here: http://www.famfamfam.com/lab/icons/silk/previews/index_abc.png
 -e git+git://github.com/adieu/django-famfam.git#egg=django-famfam
 -e git+git://github.com/sarumont/django-twilio.git#egg=django-twilio
+-e https://github.com/thauber/django-schedule.git#egg=django-schedule
 # this one doesn't work because it's designed for an older version of the Twilio API
 #-e git+git://github.com/rdegges/django-twilio.git#egg=django-twilio
 #-e git+git://github.com/pinax/pinax-theme-bootstrap.git#egg=pinax-theme-bootstrap
