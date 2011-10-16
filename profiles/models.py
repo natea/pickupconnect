@@ -15,6 +15,6 @@ class Profile(UserenaLanguageBaseProfile):
                                 related_name='profile') 
 
     name =  models.CharField(max_length=255, blank=True)
-    phone = models.CharField(_('phone number'), max_length=255, blank=True, null=True)
+    phone = models.CharField(_('Phone Number'), max_length=255, blank=True, null=True)
 
 

@@ -1,6 +1,8 @@
 from django.views.generic.simple import direct_to_template
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.views.generic import TemplateView
+
 
 from userena import views as userena_views
 from callforme import forms as callforme_forms
@@ -47,7 +49,9 @@ urlpatterns = patterns('',
         direct_to_template,
         {'template': 'static/promo.html'},
         name='promo'),
-    url(r'^i18n/', include('django.conf.urls.i18n')),    
+    url(r'^i18n/', include('django.conf.urls.i18n')),   
+    url(r'^about/', TemplateView.as_view(template_name="about.html")),
+    url(r'^contact/', TemplateView.as_view(template_name="contact.html")),
     # url(r'^$', 'django_twilio.views.conference', {
     #     'name': 'conf1',
     #     'wait_url': 'http://twimlets.com/holdmusic?Bucket=com.twilio.music.rock',
