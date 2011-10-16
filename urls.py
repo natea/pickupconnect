@@ -26,7 +26,8 @@ urlpatterns = patterns('',
     url(r'^testsms/$', 'callforme.views.testsms'),
     url(r'^sms/$', 'callforme.views.twilio_sms'),
     url(r'^call/$', 'callforme.views.twilio_call'),
-    url(r'^verify\-phone/$', 'callforme.views.twilio_verify')
+    url(r'^verify\-phone/$', 'callforme.views.twilio_verify'),
+    url(r'^twiml\-response/$', 'callforme.views.twiml_response'),
     
     # account stuff using userena
     url(r'^accounts/', include('userena.urls')),
