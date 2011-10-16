@@ -1,0 +1,32 @@
+{% extends "bootstrap_base.html" %}
+
+{% block head_title %}{% endblock %}
+
+{% block extra_head_base %}
+    {% include '_googleanalytics.html' %}
+{% endblock %}
+
+{% block nav %}
+<ul class="nav">
+        <li {% ifequal section "contacts" %} class="active" {% endifequal %}>
+            <a href="/contacts">Contacts</a>
+        </li>
+        <li {% ifequal section "settings" %} class="active" {% endifequal %}>
+            <a href="/settings">Settings</a>
+        </li>
+        <li {% ifequal section "about" %} class="active" {% endifequal %}>
+            <a href="/about">About</a>
+        </li>
+        <li {% ifequal section "contact" %} class="active" {% endifequal %}>
+            <a href="/contact">Contact</a>
+        </li>
+</ul>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block footer %}
+    {% include '_footer.html' %}
+{% endblock %}
+
