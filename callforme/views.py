@@ -11,6 +11,9 @@ from twilio import TwilioRestException
 from twilio.rest import TwilioRestClient
 from django.conf import settings
 
+from django.dispatch import receiver
+from userena.signals import signup_complete
+
 account = settings.TWILIO_ACCOUNT_SID
 token = settings.TWILIO_AUTH_TOKEN
 
@@ -37,8 +40,11 @@ def twilio_call(request):
     """Make a phone call using the Twilio API"""
     client = TwilioRestClient(account, token)
     
-    call = client.calls.create(to="+16262721760", from_="+14153356842",
+    # call = client.calls.create(to="+16262721760", from_="+14153356842",
+    #                            url="http://teddywing.com/twilio_da.xml")
+    call = client.calls.create(to="+16262721760", from_="+16175000768",
                                url="http://teddywing.com/twilio_da.xml")
+    
     # print call.length
     # print call.sid
     return render_to_response('call.html')
@@ -51,17 +57,21 @@ def twiml_response(request):
     #   d.number("+14153356842")
     return HttpResponse(r, mimetype='text/xml')
 
-def twilio_verify(request):
+@receiver(signup_complete)
+def twilio_verify(sender, **kwargs):
     """ Verify a user's phone with Twilio """
     client = TwilioRestClient(account, token)
     
-    #validation = client.callerids.validate("""PHONE NUMBER (source from DB)""")
+    user = kwargs['user']
     
-    validation = {'validation_code' : "613332"}
+    print str(user.phone) #this will work when phone numbers get saved
     
-    return render_to_response('validation.html',
-                             {'validation_code' : validation['validation_code']},
-                             RequestContext(request))
+    validation = client.callerids.validate("+" + str(user.phone))
+    
+    print validation
+    # return render_to_response('validation.html',
+    #                          {'validation_code' : validation['validation_code']},
+    #                          RequestContext(request))
 
 def home(request):
     return render_to_response('index.html',

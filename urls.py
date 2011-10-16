@@ -41,6 +41,7 @@ urlpatterns = patterns('',
     url(r'^accounts/signup/$',
             userena_views.signup,
             {'signup_form': callforme_forms.SignupFormCustomized}),
+            #'success_url' : 'callforme.views.twilio_verify'
             
     # account stuff using userena
     url(r'^accounts/', include('userena.urls')),
