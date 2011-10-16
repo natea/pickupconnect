@@ -95,7 +95,7 @@ def home(request):
         return render_to_response("accounts/signin/")
 
 def contacts(request):
-    contact_list = Contact.objects.all().order_by('name')
+    contact_list = Contact.objects.filter(user=request.user).order_by('name')
     return render_to_response('contacts.html', {'contact_list': contact_list},
                               RequestContext(request))
 
