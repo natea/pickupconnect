@@ -47,20 +47,17 @@ Resources
 
 Below are the packages that we've used to build DialAssist.
 
-Django
-------
+User registration
+-----------------
 
-* `django-socialauth  <http://agiliq.com/blog/2009/08/django-socialauth-login-via-twitter-facebook-openi/>`_ Login via Facebook, Twitter, Google, etc.
 * `django-userena <http://django-userena.org>`_ User profiles, registration, login, password reset, etc.
-* `django-famfam <http://link>`_ Cool icons that you can integrate into the design with {% load famfam_icon %} and {% famfam_silk 'building' %} where 'building' is the name of the icon image.
-* `tastypie <https://github.com/toastdriven/django-tastypie>`_
-* `tastypie docs <http://django-tastypie.readthedocs.org/en/latest/>`_
-* `django-schedule <https://github.com/thauber/django-schedule.git>`_ this branch is not maintained so read this 
-`google groups post <https://groups.google.com/d/msg/django-schedule/PnrnW-klH84/soP0jI1C-zEJ>`_ for an update
-* `django-mobile <https://github.com/gregmuellegger/django-mobile>`_ Detects the user agent and lets you serve up different templates depending on the device.
+* `Example django-userena project <https://github.com/bread-and-pepper/django-userena/blob/master/demo_project/>`_
+* `django-socialauth  <http://agiliq.com/blog/2009/08/django-socialauth-login-via-twitter-facebook-openi/>`_ Login via Facebook, Twitter, Google, etc.
 
 Twilio
 ------
+
+`Twilio <http://twilio.com>`_ is used to place the calls. Thanks to `Rob Spectre <http://brooklynhacker.com>`_ from Twilio for answering all of our questions and providing Twilio credit!
 
 * `twilio-python <http://readthedocs.org/docs/twilio-python/en/latest/>`_
 * `django-twilio <https://github.com/rdegges/django-twilio>`_  
@@ -72,9 +69,19 @@ Design
 
 * `Twitter Bootstrap <http://twitter.github.com/bootstrap>`_ UI framework for building nice-looking web applications
 * `famfam icon set <http://www.famfamfam.com/lab/icons/silk/previews/index_abc.png>`_
+* `django-famfam <http://link>`_ Cool icons that you can integrate into the design with {% load famfam_icon %} and {% famfam_silk 'building' %} where 'building' is the name of the icon image.
 
-Custom Webhook Info
-___________________
+Scheduling
+----------
 
-* `Post Bin Output <http://www.postbin.org/100el3i>`_
-* `Event API <http://analytics.performable.com/v1/event?_n=3MjmQk5zKfkP&_a=8LuYZb>`_
+* `django-schedule <https://github.com/thauber/django-schedule>`_ this branch is not maintained so read this `google groups post <https://groups.google.com/d/msg/django-schedule/PnrnW-klH84/soP0jI1C-zEJ>`_ for an update
+
+Mobile
+------
+
+* `django-mobile <https://github.com/gregmuellegger/django-mobile>`_ Detects the user agent and lets you serve up different templates depending on the device.
+
+If we wanted to build an API, for example to provide a backend to an iPhone or Android mobile phone app, we could build it with TastyPie.
+
+* `tastypie <https://github.com/toastdriven/django-tastypie>`_
+* `tastypie docs <http://django-tastypie.readthedocs.org/en/latest/>`_
