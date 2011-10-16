@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.hashcompat import sha_constructor
 
 from userena.forms import SignupFormOnlyEmail
+from models import Contact
 from profiles.models import Profile
  
 import random
@@ -39,3 +40,4 @@ class SignupFormCustomized(SignupFormOnlyEmail):
         # TODO: need code to save phone number to profile record
         
         return super(SignupFormCustomized, self).save()
+    
