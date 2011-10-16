@@ -1,17 +1,17 @@
 # Create your views here.
-from twilio.twiml import Response, Sms
-from twilio import twiml
 from django_twilio.decorators import twilio_view
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-
 from django.http import HttpResponse
+from django.conf import settings
+from django.dispatch import receiver
 
 from twilio import TwilioRestException
 from twilio.rest import TwilioRestClient
-from django.conf import settings
+from twilio.twiml import Response, Sms
+from twilio import twiml
 
-from django.dispatch import receiver
+from callforme.models import Contact, ContactForm
 from userena.signals import activation_complete
 
 account = settings.TWILIO_ACCOUNT_SID
@@ -88,5 +88,36 @@ def home(request):
         return render_to_response("accounts/signin/")
 
 def contacts(request):
-    return render_to_response('contacts.html', context_instance = RequestContext(request))
+    contact_list = Contact.objects.all().order_by('name')
+    return render_to_response('contacts.html', {'contact_list': contact_list},
+                              RequestContext(request))
+
+#                              return render_to_response('contacts.html', context_instance = RequestContext(request))
+
+def add_contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        
+        if form.is_valid():
+            new_contact = Contact(user=request.user,
+                           name=form.cleaned_data["name"],
+                           phone=form.cleaned_data["phone"],
+                           birthday=form.cleaned_data["birthday"])
+                           
+            new_contact.save()
+
+            return HttpResponseRedirect(reverse("contact-detail",
+                                                kwargs=dict(contact_id=new_contact.id)))
+    else:
+        user = request.user
+        form = ContactForm(initial={"user": user})
+        
+        return render_to_response("add_contact.html",
+                                  {"form": form,},
+                                  RequestContext(request))
+                                  
+def contact_detail(request):
+    return render_to_response('contact_detail.html', {'contact_id': contact_id},
+                              RequestContext(request))
+
 

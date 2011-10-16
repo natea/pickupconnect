@@ -19,6 +19,14 @@ This is a test.
 urlpatterns = patterns('',
     # Examples:
     # 
+    url(r'^$', 'callforme.views.home', name='home'),
+    url(r'^contacts/new/$', 'callforme.views.add_contact', name="add-contact"),
+    url(r'^contacts/(?P<contact_id>\d+)/$', 'contact', name="contact-detail"),
+    url(r'^contacts/', 'callforme.views.contacts', name='contacts'),
+    url(r'^promo/$',
+        direct_to_template,
+        {'template': 'promo.html'},
+        name='promo'),
     url(r'^$', direct_to_template,
         {'template': 'index.html'}, name='home'),  
     url(r'^contacts/', 'callforme.views.contacts'),
@@ -50,6 +58,7 @@ urlpatterns = patterns('',
     # account stuff using userena
     url(r'^accounts/', include('userena.urls')),
     url(r'^messages/', include('userena.contrib.umessages.urls')),
+
     url(r'^$',
         direct_to_template,
         {'template': 'static/promo.html'},

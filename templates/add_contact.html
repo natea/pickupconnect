@@ -1,0 +1,32 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block head_title %}
+Add contact
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1>Add contact</h1>
+</div>
+<div class="well">
+<form action="" method="post">
+  {% csrf_token %}
+  <fieldset class="inlineLabels">
+      {{ form|as_bootstrap }}
+  </fieldset>
+  <div class="actions">
+      <input class="btn primary large" type="submit" value="{% trans "Add contact" %}" />
+  </div>
+</form>
+</div>
+{% endblock %}
+{% block extra_body %}
+    <script type="text/javascript">
+        $(function(){
+            $("#id_name").focus();
+        });
+    </script>
+{% endblock %}
