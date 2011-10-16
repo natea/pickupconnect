@@ -12,7 +12,7 @@ from twilio.rest import TwilioRestClient
 from django.conf import settings
 
 from django.dispatch import receiver
-from userena.signals import signup_complete
+from userena.signals import activation_complete
 
 account = settings.TWILIO_ACCOUNT_SID
 token = settings.TWILIO_AUTH_TOKEN
@@ -42,7 +42,7 @@ def twilio_call(request):
     
     # call = client.calls.create(to="+16262721760", from_="+14153356842",
     #                            url="http://teddywing.com/twilio_da.xml")
-    call = client.calls.create(to="+16262721760", from_="+16175000768",
+    call = client.calls.create(to="+14153356842", from_="+16175000768",
                                url="http://teddywing.com/twilio_da.xml")
     
     # print call.length
@@ -57,16 +57,17 @@ def twiml_response(request):
     #   d.number("+14153356842")
     return HttpResponse(r, mimetype='text/xml')
 
-@receiver(signup_complete)
+@receiver(activation_complete)
 def twilio_verify(sender, **kwargs):
     """ Verify a user's phone with Twilio """
     client = TwilioRestClient(account, token)
     
     user = kwargs['user']
     
-    print str(user.phone) #this will work when phone numbers get saved
+    user_profile = user.get_profile()
+    print str(user_profile.phone)
     
-    validation = client.callerids.validate("+" + str(user.phone))
+    validation = client.caller_ids.validate("+" + str(user_profile.phone))
     
     print validation
     # return render_to_response('validation.html',
