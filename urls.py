@@ -1,7 +1,6 @@
 from django.views.generic.simple import direct_to_template
 from django.conf.urls.defaults import *
 from django.conf import settings
-#from urls.urlpatterns import RegexURLPattern
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -13,6 +12,7 @@ This is a test.
 
 urlpatterns = patterns('',
     # Examples:
+    # 
     url(r'^$', 'callforme.views.home', name='home'),
     # url(r'^hubbing/', include('hubbing.foo.urls')),
 
@@ -44,7 +44,13 @@ urlpatterns = patterns('',
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$',
-         'django.views.static.serve',
-         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True, }),
-)
+                            url(r'^static/(?P<path>.*)$',
+                                'django.views.static.serve',
+                                {'document_root': 'static'}))
+                                
+# if settings.DEBUG:
+#     urlpatterns += patterns('',
+#         (r'^static/(?P<path>.*)$',
+#          'django.views.static.serve',
+#          {'document_root': settings.STATIC_ROOT, 'show_indexes': True, }),
+# )
