@@ -2,6 +2,9 @@ from django.views.generic.simple import direct_to_template
 from django.conf.urls.defaults import *
 from django.conf import settings
 
+from userena import views as userena_views
+from callforme import forms as callforme_forms
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -33,6 +36,10 @@ urlpatterns = patterns('',
     url(r'^verify\-phone/$', 'callforme.views.twilio_verify'),
     url(r'^twiml\-response/$', 'callforme.views.twiml_response'),
     
+    url(r'^accounts/signup/$',
+            userena_views.signup,
+            {'signup_form': callforme_forms.SignupFormCustomized}),
+            
     # account stuff using userena
     url(r'^accounts/', include('userena.urls')),
     url(r'^messages/', include('userena.contrib.umessages.urls')),
