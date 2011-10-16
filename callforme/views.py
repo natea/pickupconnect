@@ -55,7 +55,7 @@ def twilio_verify(request):
     """ Verify a user's phone with Twilio """
     client = TwilioRestClient(account, token)
     
-    #validation = client.callerids.validate("""PHONE NUMBER""")
+    #validation = client.callerids.validate("""PHONE NUMBER (source from DB)""")
     
     validation = {'validation_code' : "613332"}
     
