@@ -64,6 +64,7 @@ def twilio_verify(request):
                              RequestContext(request))
 
 def home(request):
+    """depricated"""
     return render_to_response('index.html',
                               context_instance=RequestContext(request))
     #fix this later. this line should never be reached
@@ -71,4 +72,7 @@ def home(request):
         return render_to_response("index.html")
     else:
         return render_to_response("accounts/signin/")
+
+def contacts(request):
+    return render_to_response('contacts.html', context_instance = RequestContext(request))
 
