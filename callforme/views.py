@@ -37,8 +37,8 @@ def twilio_call(request):
     """Make a phone call using the Twilio API"""
     client = TwilioRestClient(account, token)
     
-    call = client.calls.create(to="+15083040360", from_="+14153356842",
-                               url="http://p00000563.djangozoom.net/twiml-response/")
+    call = client.calls.create(to="+16262721760", from_="+14153356842",
+                               url="http://teddywing.com/twilio_da.xml")
     # print call.length
     # print call.sid
     return render_to_response('call.html')
@@ -46,9 +46,9 @@ def twilio_call(request):
 def twiml_response(request):
     r = twiml.Response()
     # r.say(text, voice=voice, language=language, loop=loop)
-    r.say("Calling you")
-    with r.dial() as d:
-      d.number("+14153356842")
+    r.say("Hello we're testing dial assist")
+    # with r.dial() as d:
+    #   d.number("+14153356842")
     return HttpResponse(r, mimetype='text/xml')
 
 def twilio_verify(request):
