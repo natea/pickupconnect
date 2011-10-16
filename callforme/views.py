@@ -1,17 +1,18 @@
 # Create your views here.
-from twilio.twiml import Response, Sms
-from twilio import twiml
 from django_twilio.decorators import twilio_view
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-
 from django.http import HttpResponse
+from django.conf import settings
+from django.dispatch import receiver
 
 from twilio import TwilioRestException
 from twilio.rest import TwilioRestClient
-from django.conf import settings
+from twilio.twiml import Response, Sms
+from twilio import twiml
 
 from callforme.models import Contact, ContactForm
+from userena.signals import activation_complete
 
 account = settings.TWILIO_ACCOUNT_SID
 token = settings.TWILIO_AUTH_TOKEN
@@ -39,8 +40,11 @@ def twilio_call(request):
     """Make a phone call using the Twilio API"""
     client = TwilioRestClient(account, token)
     
-    call = client.calls.create(to="+16262721760", from_="+14153356842",
+    # call = client.calls.create(to="+16262721760", from_="+14153356842",
+    #                            url="http://teddywing.com/twilio_da.xml")
+    call = client.calls.create(to="+14153356842", from_="+16175000768",
                                url="http://teddywing.com/twilio_da.xml")
+    
     # print call.length
     # print call.sid
     return render_to_response('call.html')
@@ -53,19 +57,25 @@ def twiml_response(request):
     #   d.number("+14153356842")
     return HttpResponse(r, mimetype='text/xml')
 
-def twilio_verify(request):
+@receiver(activation_complete)
+def twilio_verify(sender, **kwargs):
     """ Verify a user's phone with Twilio """
     client = TwilioRestClient(account, token)
     
-    #validation = client.callerids.validate("""PHONE NUMBER""")
+    user = kwargs['user']
     
-    validation = {'validation_code' : "613332"}
+    user_profile = user.get_profile()
+    print str(user_profile.phone)
     
-    return render_to_response('validation.html',
-                             {'validation_code' : validation['validation_code']},
-                             RequestContext(request))
+    validation = client.caller_ids.validate("+" + str(user_profile.phone))
+    
+    print validation
+    # return render_to_response('validation.html',
+    #                          {'validation_code' : validation['validation_code']},
+    #                          RequestContext(request))
 
 def home(request):
+    """depricated"""
     return render_to_response('index.html',
                               context_instance=RequestContext(request))
     #fix this later. this line should never be reached
@@ -79,6 +89,7 @@ def contacts(request):
     return render_to_response('contacts.html', {'contact_list': contact_list},
                               RequestContext(request))
 
+#                              return render_to_response('contacts.html', context_instance = RequestContext(request))
 
 def add_contact(request):
     if request.method == "POST":
@@ -105,4 +116,5 @@ def add_contact(request):
 def contact_detail(request):
     return render_to_response('contact_detail.html', {'contact_id': contact_id},
                               RequestContext(request))
-                                    
+
+
