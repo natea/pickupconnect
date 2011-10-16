@@ -11,6 +11,8 @@ from twilio import TwilioRestException
 from twilio.rest import TwilioRestClient
 from django.conf import settings
 
+from callforme.models import Contact, ContactForm
+
 account = settings.TWILIO_ACCOUNT_SID
 token = settings.TWILIO_AUTH_TOKEN
 
@@ -72,3 +74,35 @@ def home(request):
     else:
         return render_to_response("accounts/signin/")
 
+def contacts(request):
+    contact_list = Contact.objects.all().order_by('name')
+    return render_to_response('contacts.html', {'contact_list': contact_list},
+                              RequestContext(request))
+
+
+def add_contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        
+        if form.is_valid():
+            new_contact = Contact(user=request.user,
+                           name=form.cleaned_data["name"],
+                           phone=form.cleaned_data["phone"],
+                           birthday=form.cleaned_data["birthday"])
+                           
+            new_contact.save()
+
+            return HttpResponseRedirect(reverse("contact-detail",
+                                                kwargs=dict(contact_id=new_contact.id)))
+    else:
+        user = request.user
+        form = ContactForm(initial={"user": user})
+        
+        return render_to_response("add_contact.html",
+                                  {"form": form,},
+                                  RequestContext(request))
+                                  
+def contact_detail(request):
+    return render_to_response('contact_detail.html', {'contact_id': contact_id},
+                              RequestContext(request))
+                                    
