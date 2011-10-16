@@ -49,8 +49,8 @@ def twilio_call(request):
     
 #    print str(contact_phone)
     
-    # call = client.calls.create(to="+14153356842", from_="+16175000768",
-    #                            url="http://teddywing.com/twilio_da.xml")
+    call = client.calls.create(to="+16175174953", from_="+16175000768",
+                               url="http://teddywing.com/twilio_da.xml")
     
     # Steve: 6172901329
     # John: 6262721760
