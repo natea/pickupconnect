@@ -2,3 +2,4 @@
 local_settings.py
 callme.db
 /site_media/
+/media/
