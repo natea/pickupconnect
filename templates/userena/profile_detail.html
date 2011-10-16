@@ -1,0 +1,40 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+
+{% block head_title %}{% blocktrans with profile.user.username as username %}{{ username }}'s profile.{% endblocktrans %}{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <div class="page-title">
+        <h2>{{ profile.user.username }} {% if profile.user.get_full_name %}({{ profile.user.get_full_name }}){% endif %}</h2>
+    </div>
+    
+  {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
+  {% if user.username == profile.user.username %}
+  <ul class="tabs">
+    <li class="active"><a href="{% url userena_profile_detail user.username %}">{% trans "View profile" %}</a></li>
+    <li><a href="{% url userena_profile_edit user.username %}">{% trans "Edit details" %}</a></li>
+    <li><a href="{% url userena_password_change user.username %}">{% trans "Change password" %}</a></li>
+    <li><a href="{% url userena_email_change user.username %}">{% trans "Change email" %}</a></li>
+  </ul>
+  {% endif %}
+
+  <div id="well">
+    <img src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
+    {% if profile.user.get_full_name %}
+    <p><strong>{% trans "Name" %}</strong><br /> {{ profile.user.get_full_name }}</p>
+    {% endif %}
+    {% if profile.user.email %}
+    <p><strong>{% trans "Email" %}</strong><br />{{ profile.user.email }}</p>
+    {% endif %}
+    {% if profile.phone %}
+    <p><strong>{% trans "Phone" %}</strong><br /> {{ profile.phone }}</p>
+    {% endif %}
+    {% if profile.twitter %}
+    <p><strong>{% trans "Twitter" %}</strong><br /> <a href="http://twitter.com/{{ profile.twitter }}">{{ profile.twitter }}</a></p>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}
