@@ -47,6 +47,32 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    path("static"),
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/"
+STATIC_ROOT = path("site_media")
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/site_media/'
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = path("media")
@@ -56,35 +82,10 @@ MEDIA_ROOT = path("media")
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = path("static")
-
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
-
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
-
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '$m*#be2sz5lafbxzh_^p6lgvg*-mp=e80xq@!-*%^ml2j_-tw2'
@@ -97,6 +98,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,6 +123,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+# this needs to be replaced with a real email backend before we can send emails
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 ROOT_URLCONF = 'urls'
@@ -139,9 +142,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_twilio',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'django_twilio',
 #    'pinax_theme_bootstrap',
     'callforme',
     'profiles',
@@ -150,8 +152,9 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'userena',
     'userena.contrib.umessages',
-    # South is used for database schema migrations
-    'south',
+    'south', # South is used for database schema migrations
+    'famfam', # famfam gives us cool icons
+    'debug_toolbar', # debug toolbar is awesome for debugging
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -181,6 +184,12 @@ TWILIO_AUTH_TOKEN = 'xxx'
 # validated with twilio in order to work. See
 # https://www.twilio.com/user/account/phone-numbers#
 TWILIO_DEFAULT_CALLERID = 'NNNNNNNNNN'
+
+# famfam icons
+FAMFAM_SILK_ROOT = STATIC_URL + 'img/icons/'
+
+# this is used for the Django debug toolbar
+INTERNAL_IPS = ('127.0.0.1',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
