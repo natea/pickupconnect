@@ -57,7 +57,10 @@ User registration
 Twilio
 ------
 
-`Twilio <http://twilio.com>`_ is used to place the calls. Thanks to `Rob Spectre <http://brooklynhacker.com>`_ from Twilio for answering all of our questions and providing Twilio credit!
+`Twilio <http://twilio.com>`_ is a cool service that we use to connect you by phone with your friends and loved ones. 
+
+Thanks to `Rob Spectre <http://brooklynhacker.com>`_ from Twilio for answering all of our questions, providing Twilio credit, and writing this
+`thoughtful and inspirational blog post about losing someone you love <http://brooklynhacker.com/post/9243052778/lessons-learned-from-losing-someone-you-love>`_
 
 * `twilio-python <http://readthedocs.org/docs/twilio-python/en/latest/>`_
 * `django-twilio <https://github.com/rdegges/django-twilio>`_  
