@@ -14,6 +14,10 @@ urlpatterns = patterns('',
     # Examples:
     # 
     url(r'^$', 'callforme.views.home', name='home'),
+    url(r'^promo/$',
+        direct_to_template,
+        {'template': 'promo.html'},
+        name='promo'),
     # url(r'^hubbing/', include('hubbing.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -26,6 +30,8 @@ urlpatterns = patterns('',
     url(r'^testsms/$', 'callforme.views.testsms'),
     url(r'^sms/$', 'callforme.views.twilio_sms'),
     url(r'^call/$', 'callforme.views.twilio_call'),
+    url(r'^verify\-phone/$', 'callforme.views.twilio_verify'),
+    url(r'^twiml\-response/$', 'callforme.views.twiml_response'),
     
     # account stuff using userena
     url(r'^accounts/', include('userena.urls')),
@@ -48,9 +54,3 @@ if settings.DEBUG:
                                 'django.views.static.serve',
                                 {'document_root': 'static'}))
                                 
-# if settings.DEBUG:
-#     urlpatterns += patterns('',
-#         (r'^static/(?P<path>.*)$',
-#          'django.views.static.serve',
-#          {'document_root': settings.STATIC_ROOT, 'show_indexes': True, }),
-# )

@@ -160,14 +160,17 @@ INSTALLED_APPS = (
 )
 
 # Userena settings
-LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_REDIRECT_URL = '/accounts/signin/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 AUTH_PROFILE_MODULE = 'profiles.Profile'
 
+USERENA_REDIRECT_ON_SIGNOUT = '/'
+USERENA_SIGNIN_REDIRECT_URL = '/'
 USERENA_DISABLE_PROFILE_LIST = True
 USERENA_MUGSHOT_SIZE = 140
-
+USERENA_WITHOUT_USERNAMES = True
+USERENA_ACTIVATION_REQUIRED = False
 # Guardian
 ANONYMOUS_USER_ID = -1
 

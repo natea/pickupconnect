@@ -1,8 +1,11 @@
 # Create your views here.
 from twilio.twiml import Response, Sms
+from twilio import twiml
 from django_twilio.decorators import twilio_view
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+
+from django.http import HttpResponse
 
 from twilio import TwilioRestException
 from twilio.rest import TwilioRestClient
@@ -33,13 +36,39 @@ def twilio_sms(request):
 def twilio_call(request):
     """Make a phone call using the Twilio API"""
     client = TwilioRestClient(account, token)
-
-    call = client.calls.create(to="+16175174953", from_="+15083040360",
-                               url="http://foo.com/call.xml", status_code="")
-    return call
+    
+    call = client.calls.create(to="+15083040360", from_="+14153356842",
+                               url="http://p00000563.djangozoom.net/twiml-response/")
     # print call.length
     # print call.sid
+    return render_to_response('call.html')
+    
+def twiml_response(request):
+    r = twiml.Response()
+    # r.say(text, voice=voice, language=language, loop=loop)
+    r.say("Calling you")
+    with r.dial() as d:
+      d.number("+14153356842")
+    return HttpResponse(r, mimetype='text/xml')
+
+def twilio_verify(request):
+    """ Verify a user's phone with Twilio """
+    client = TwilioRestClient(account, token)
+    
+    #validation = client.callerids.validate("""PHONE NUMBER""")
+    
+    validation = {'validation_code' : "613332"}
+    
+    return render_to_response('validation.html',
+                             {'validation_code' : validation['validation_code']},
+                             RequestContext(request))
 
 def home(request):
+<<<<<<< HEAD
     return render_to_response('index.html',
                               context_instance=RequestContext(request))
+    #fix this later. this line should never be reached
+    if signed_in:
+        return render_to_response("index.html")
+    else:
+        return render_to_response("accounts/signin/")
