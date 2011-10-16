@@ -1,0 +1,52 @@
+{% extends "site_base.html" %}
+
+{% load famfam_icon %}
+
+{% block head_title %}
+My contacts
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1>My contacts</h1>
+</div>
+<div class="container">
+
+    <div class="row">
+        <div class="span10">
+          {% if contact_list %}
+          <table class="zebra-striped" id="projectsTable">
+            <thead>
+                <tr><th>Contact</th><th>Phone number</th><th>Birthday</th><th>Last contacted</th></tr>
+            </thead>
+            <tbody>
+            {% for c in contact_list %}
+            <tr>
+                <td><a href="{% url contact contact_id=c.id %}">{% famfam_silk 'user' %} {{c.name}}</a></td>
+                <td>{{ c.phone }}</td>
+                <td>{% if c.is_birthday == True %}<span label="success"><font color="red">Birthday soon!</font>{% endif %}</span>
+                {{ c.birthday }}
+                    </td>
+                <td>{{ c.last_contacted }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+            <p>You have no contacts yet.</p>
+            <p>Why don't you start adding some?</p>
+            <a href="" class="btn success large">Add a contact</a>
+          {% endif %}
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+{% block extra_body %}
+<script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
+<script >
+  $(function() {
+    $("table#projectsTable").tablesorter({ sortList: [[0,0]] });
+  });
+</script>
+{% endblock %}
