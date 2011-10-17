@@ -1,5 +1,7 @@
 {% extends "site_base.html" %}
 
+{% load famfam_icon %}
+
 {% block head_title %}Home{% endblock %}
 
 {% block body %}
@@ -16,20 +18,22 @@
                     Stay in touch!
                 </h1>
                 <p>
-                    We want to help you you stay in touch. Register, teach us about your contacts and we'll call you with gentle reminders about all those phone calls you've been procrastinating. With you're premission, we'll even automatically bring your buddy on the line. So what are you waiting for?
+                    We want to help you you stay in touch with your friends and loved ones.
+                    
+                <ul style="list-style-image: url({{ STATIC_URL }}img/icons/accept.png);">
+                    <li>Register, teach us about your contacts.</li>
+                    <li>We'll call you with gentle reminders about all those phone calls you've been procrastinating.</li>
+                    <li>With your permission, we'll even automatically bring your buddy on the line.</li>
+                </ul>
+                  
+                    So what are you waiting for?
                 </p>
                 <p>
-                    <a class="btn primary large" href="/accounts/signup">Sign up<!--&raquo;--></a> or <a class="btn primary large" href="/accounts/signin/">Sign in</a>
+                    <a class="btn primary large" href="{% url userena_signup %}">Sign up now!</a> or <a href="{% url userena_signin %}">Sign in</a>
                 </p>
         </div>
         <div class="span8">
-            <object width="400" height="258">
-                <param name="movie" value="http://goanimate.com/player/swf/0xTSrvCmBuNM">
-                <param name="bgcolor" value="#000000">
-                <param name="allowFullScreen" value="true">
-                <param name="allowscriptaccess" value="always">
-                <embed src="http://goanimate.com/player/swf/0xTSrvCmBuNM?autostart=0" type="application/x-shockwave-flash" width="400" height="258" bgcolor="#000000" allowscriptaccess="always" allowfullscreen="true">
-            </object><br>
+            <iframe scrolling="no" allowTransparency="true" frameborder="0" width="400" height="258" src="http://goanimate.com/player/embed/0tn9mxN-g_ug"></iframe>
         </div>
     </div>
 </div>
