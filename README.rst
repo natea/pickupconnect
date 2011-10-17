@@ -20,7 +20,7 @@ Then create the virtualenv::
     $ virtualenv pickupconnect --no-site-packages
     $ cd pickupconnect
     $ source bin/activate
-    (pickupconnect)$ git clone git@github.com:natea/callme.git
+    (pickupconnect)$ git clone git@github.com:natea/pickupconnect.git
     (pickupconnect)$ cd pickupconnect
     (pickupconnect)$ pip install -r requirements.txt
     (pickupconnect)$ python manage.py syncdb
