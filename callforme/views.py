@@ -2,7 +2,7 @@
 from django_twilio.decorators import twilio_view
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.dispatch import receiver
 
@@ -113,12 +113,14 @@ def add_contact(request):
                            
             new_contact.save()
 
-            return HttpResponseRedirect(reverse("contact-detail",
-                                                kwargs=dict(contact_id=new_contact.id)))
+            return HttpResponseRedirect("../"+str(new_contact.id)+"/")
+            #kwargs=dict(contact_id=new_contact.id
+        else:
+            # TODO react to invalid form entries
+            pass
     else:
         user = request.user
         form = ContactForm(initial={"user": user})
-        
         return render_to_response("add_contact.html",
                                   {"form": form,},
                                   RequestContext(request))
@@ -126,5 +128,3 @@ def add_contact(request):
 def contact_detail(request):
     return render_to_response('contact_detail.html', {'contact_id': contact_id},
                               RequestContext(request))
-
-
