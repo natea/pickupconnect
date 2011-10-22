@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.dispatch import receiver
+from django.core.urlresolvers import reverse
 
 from twilio import TwilioRestException
 from twilio.rest import TwilioRestClient
@@ -106,9 +107,11 @@ def add_contact(request):
             new_contact = Contact(user=request.user,
                            name=form.cleaned_data["name"],
                            phone=form.cleaned_data["phone"],
-                           birthday=form.cleaned_data["birthday"])
+                           birthday=form.cleaned_data["birthday"],
+                           twitter=form.cleaned_data["twitter"],
+                           frequency=form.cleaned_data["frequency"])
             new_contact.save()
-            return HttpResponseRedirect("../"+str(new_contact.id)+"/")
+            return HttpResponseRedirect(reverse("contacts"))
             #kwargs=dict(contact_id=new_contact.id
         else:
             # TODO react to invalid form entries
@@ -121,5 +124,7 @@ def add_contact(request):
                                   RequestContext(request))
                                   
 def contact_detail(request, contact_id):
-    return render_to_response('contact_detail.html', {'contact_id': contact_id},
+    contact = Contact.objects.filter(id=contact_id)[0]
+    form = ContactForm(initial={"id": contact.id })
+    return render_to_response('contact_detail.html', {'contact': contact, 'form': form },
                               RequestContext(request))
