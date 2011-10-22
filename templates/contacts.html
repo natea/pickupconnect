@@ -18,7 +18,14 @@ My contacts
           {% if contact_list %}
           <table class="zebra-striped" id="projectsTable">
             <thead>
-                <tr><th>Contact</th><th>Phone number</th><th>Twitter</th><th>Birthday</th><th>Frequency</th></tr>
+                <tr>
+                    <th>Contact</th>
+                    <th>Phone number</th>
+                    <th>Twitter</th>
+                    <th>Birthday</th>
+                    <th>Frequency</th>
+                    <th>Delete?</th>
+                </tr>
             </thead>
             <tbody>
             {% for c in contact_list %}
@@ -28,6 +35,7 @@ My contacts
                 <td>{{ c.twitter }}</td>
                 <td>{{ c.birthday }}</td>
                 <td>{{ c.get_frequency_display }}</td>
+                <td><a href="./{{ c.id }}/delete/">Delete</a></td>
             </tr>
             {% endfor %}
             </tbody>

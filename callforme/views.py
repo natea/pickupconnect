@@ -150,3 +150,12 @@ def contact_detail(request, contact_id):
     form = ContactForm(initial={"id": contact.id })
     return render_to_response('contact_detail.html', {'contact': contact, 'form': form },
                               RequestContext(request))
+                              
+def contact_delete(request, contact_id):
+    user = request.user
+    contact = Contact.objects.get(id=contact_id)
+    if user == contact.user:
+        contact.delete()
+        return HttpResponseRedirect(reverse("contacts"))
+    else:
+        return HttpResponseRedirect(reverse("contacts"))

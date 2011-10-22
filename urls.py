@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^contacts/new/$', 'callforme.views.add_contact', name="add-contact"),
     url(r'^contacts/(?P<contact_id>\d+)/$', 'callforme.views.contact_detail', name="contact-detail"),
     url(r'^contacts/$', 'callforme.views.contacts', name='contacts'),
-
+    url(r'^contacts/(?P<contact_id>\d+)/delete/$', 'callforme.views.contact_delete', name='contact-delete'),
 
  #   url(r'^promo/$',
  #       direct_to_template,
