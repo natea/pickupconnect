@@ -21,7 +21,6 @@ class ContactForm(ModelForm):
     class Meta:
         model = Contact
         exclude = ('user',)
-#        fields = ('name', 'phone', 'birthday', 'frequency')
         
 class Call(models.Model):
     user = models.ForeignKey(User)
