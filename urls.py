@@ -23,10 +23,9 @@ urlpatterns = patterns('',
     url(r'^$', direct_to_template,
         {'template': 'index.html'}, name='home'),  
 
-
     url(r'^contacts/new/$', 'callforme.views.add_contact', name="add-contact"),
-    url(r'^contacts/(?P<contact_id>\d+)/$', 'contact', name="contact-detail"),
-    url(r'^contacts/', 'callforme.views.contacts', name='contacts'),
+    url(r'^contacts/(?P<contact_id>\d+)/$', 'callforme.views.contact_detail', name="contact-detail"),
+    url(r'^contacts/$', 'callforme.views.contacts', name='contacts'),
 
 
  #   url(r'^promo/$',
