@@ -99,20 +99,15 @@ def contacts(request):
     return render_to_response('contacts.html', {'contact_list': contact_list},
                               RequestContext(request))
 
-#                              return render_to_response('contacts.html', context_instance = RequestContext(request))
-
 def add_contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
-        
         if form.is_valid():
             new_contact = Contact(user=request.user,
                            name=form.cleaned_data["name"],
                            phone=form.cleaned_data["phone"],
                            birthday=form.cleaned_data["birthday"])
-                           
             new_contact.save()
-
             return HttpResponseRedirect("../"+str(new_contact.id)+"/")
             #kwargs=dict(contact_id=new_contact.id
         else:
