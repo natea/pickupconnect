@@ -42,7 +42,7 @@ def twilio_call(request):
     phone = "+1" + user_profile.phone
     
     call = client.calls.create(to=phone, from_=settings.TWILIO_DEFAULT_CALLERID,
-                               url="http://pickupconnect.djangozoom.net/twiml-response")
+                               url="http://pickupconnect-staging.djangozoom.net/twiml-response")
     
     # Steve: 6172901329
     # John: 6262721760  #6175174953
@@ -61,7 +61,7 @@ def twiml_response(request):
     r = twiml.Response()
     # r.say(text, voice=voice, language=language, loop=loop)
     r.say("Pickup Connect would like to connect you to %s." %contact.name)
-    with r.gather(action="http://pickupconnect.djangozoom.net/twiml-connect?contact_id=%s" %contact_id, finishOnKey=1, timeout=15) as g:
+    with r.gather(action="http://pickupconnect-staging.djangozoom.net/twiml-connect?contact_id=%s" %contact_id, finishOnKey=1, timeout=15) as g:
         # When we get a background queue, stop using a GET param and take the contact_id from a call
         g.say('Press 1 followed by the pound key to continue connecting.')
         # "... or stay on the line to continue with the call"
