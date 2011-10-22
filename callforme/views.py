@@ -125,6 +125,6 @@ def add_contact(request):
                                   {"form": form,},
                                   RequestContext(request))
                                   
-def contact_detail(request):
+def contact_detail(request, contact_id):
     return render_to_response('contact_detail.html', {'contact_id': contact_id},
                               RequestContext(request))
