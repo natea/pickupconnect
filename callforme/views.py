@@ -1,5 +1,4 @@
 # Create your views here.
-from django_twilio.decorators import twilio_view
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -17,7 +16,6 @@ from userena.signals import activation_complete
 account = settings.TWILIO_ACCOUNT_SID
 token = settings.TWILIO_AUTH_TOKEN
 
-@twilio_view
 def testsms(request):
     r = Response()
     r.append(Sms('Thanks for the SMS message!', to='6175174953'))
@@ -40,17 +38,11 @@ def twilio_call(request):
     """Make a phone call using the Twilio API"""
     client = TwilioRestClient(account, token)
     
-    # call = client.calls.create(to="+16262721760", from_="+14153356842",
-    #                            url="http://teddywing.com/twilio_da.xml")
+    user_profile = request.user.get_profile()
+    phone = "+1" + user_profile.phone
     
-#    id = 1
-    
-#    contact_phone = Contact.objects.filter(id=id).phone
-    
-#    print str(contact_phone)
-    
-    call = client.calls.create(to="+15083040360", from_="+16175000768",
-                               url="http://teddywing.com/twilio_da.xml")
+    call = client.calls.create(to=phone, from_=TWILIO_DEFAULT_CALLERID,
+                               url="http://pickupconnect.djangozoom.net/twiml-response")
     
     # Steve: 6172901329
     # John: 6262721760  #6175174953
@@ -60,11 +52,36 @@ def twilio_call(request):
     return render_to_response('call.html', RequestContext(request))
     
 def twiml_response(request):
+    import random
+    contact_id = random.randrange(1, request.user.contact_set.count()) # Pick a random contact
+    
+    user_profile = request.user.get_profile()
+    contact = request.user.contact_set.filter(id=contact_id)[0]
+    
     r = twiml.Response()
     # r.say(text, voice=voice, language=language, loop=loop)
-    r.say("Hello we're testing dial assist")
-    # with r.dial() as d:
-    #   d.number("+14153356842")
+    r.say("Pickup Connect would like to connect you to %s." %contact.name)
+    with r.gather(action="http://pickupconnect.djangozoom.net/twiml-connect?contact_id=%s" %contact_id, finishOnKey=1, timeout=15) as g:
+        # When we get a background queue, stop using a GET param and take the contact_id from a call
+        g.say('Press 1 followed by the pound key to continue connecting.')
+        # "... or stay on the line to continue with the call"
+    return HttpResponse(r, mimetype='text/xml')
+
+def twiml_connect(request):
+    r = twiml.Response()
+    user_profile = request.user.get_profile()
+    
+    try:
+        contact_phone = ( request.user.contact_set.filter(id=request.GET['contact_id']) )[0].phone
+    except IndexError: # Exception on contact not found
+        pass
+    
+    if 'Digits' in request.POST:
+        if request.POST['Digits'] == '1':
+            with r.dial(caller_id="+1%s" %user_profile.phone) as d:#caller_id = user->phone
+               d.number("+1%s" %contact_phone)
+    else:
+        r.say('Disconnecting. Thank you for using Pickup Connect.')
     return HttpResponse(r, mimetype='text/xml')
 
 @receiver(activation_complete)
