@@ -53,15 +53,17 @@ def twilio_call(request):
     
 def twiml_response(request):
     import random
-    contact_id = random.randrange(1, request.user.contact_set.count()) # Pick a random contact
+    
+    num_contacts = request.user.contact_set.count()
+    contact_select = random.randrange(0, num_contacts) if num_contacts > 1 else 1 # Pick a random contact (fails if you have no contacts)
     
     user_profile = request.user.get_profile()
-    contact = request.user.contact_set.filter(id=contact_id)[0]
+    contact = request.user.contact_set.all()[contact_select]
     
     r = twiml.Response()
     # r.say(text, voice=voice, language=language, loop=loop)
     r.say("Pickup Connect would like to connect you to %s." %contact.name)
-    with r.gather(action="http://pickupconnect-staging.djangozoom.net/twiml-connect?contact_id=%s" %contact_id, finishOnKey=1, timeout=15) as g:
+    with r.gather(action="http://pickupconnect-staging.djangozoom.net/twiml-connect?contact_id=%s" %contact.id, finishOnKey=1, timeout=15) as g:
         # When we get a background queue, stop using a GET param and take the contact_id from a call
         g.say('Press 1 followed by the pound key to continue connecting.')
         # "... or stay on the line to continue with the call"
