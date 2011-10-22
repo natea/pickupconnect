@@ -82,8 +82,8 @@ def twiml_connect(request):
     except IndexError: # Exception on contact not found
         pass
     
-    if 'Digits' in request.POST:
-        if request.POST['Digits'] == '1':
+    if 'Digits' in request.GET:
+        if request.GET['Digits'] == '1':
             with r.dial(caller_id="+1%s" %user_profile.phone) as d:#caller_id = user->phone
                d.number("+1%s" %contact_phone)
     else:
