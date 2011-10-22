@@ -41,7 +41,7 @@ def twilio_call(request):
     user_profile = request.user.get_profile()
     phone = "+1" + user_profile.phone
     
-    call = client.calls.create(to=phone, from_=TWILIO_DEFAULT_CALLERID,
+    call = client.calls.create(to=phone, from_=settings.TWILIO_DEFAULT_CALLERID,
                                url="http://pickupconnect.djangozoom.net/twiml-response")
     
     # Steve: 6172901329
