@@ -18,15 +18,23 @@ My contacts
           {% if contact_list %}
           <table class="zebra-striped" id="projectsTable">
             <thead>
-                <tr><th>Contact</th><th>Phone number</th><th>Birthday</th><th>Frequency</th></tr>
+                <tr><th>Contact</th><th>Phone number</th><th>Twitter</th><th>Birthday</th><th>Frequency</th></tr>
             </thead>
             <tbody>
             {% for c in contact_list %}
             <tr>
                 <td><a href="{% url contact contact_id=c.id %}">{% famfam_silk 'user' %} {{c.name}}</a></td>
-                <td>{{ c.phone }}</td>
+                <td>
+                    <input type="text" value="{{ c.phone }}" id="title" onclick="toggle_editor();">
+                    <div id="tools" style="display:none;">
+                        <input id="save" value="SAVE" tabindex="12" type="submit" onclick="save();">
+                        <span>OR</span>
+                        <input value="Cancel" onclick="cancel_edit();" tabindex="13" type="button">
+                    </div>
+                </td>
+                <td>{{ c.twitter }}</td>
                 <td>{{ c.birthday }}</td>
-                <td>{{ c.frequency }}</td>
+                <td>{{ c.get_frequency_display }}</td>
             </tr>
             {% endfor %}
             </tbody>
