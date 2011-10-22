@@ -55,7 +55,7 @@ def twiml_response(request):
     import random
     
     num_contacts = request.user.contact_set.count()
-    contact_select = random.randrange(0, num_contacts) if num_contacts > 1 else 1 # Pick a random contact (fails if you have no contacts)
+    contact_select = random.randrange(0, num_contacts) if num_contacts > 1 else 0 # Pick a random contact (fails if you have no contacts)
     
     user_profile = request.user.get_profile()
     contact = request.user.contact_set.all()[contact_select]
