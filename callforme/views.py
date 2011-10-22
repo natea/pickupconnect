@@ -42,7 +42,7 @@ def twilio_call(request):
     phone = "+1" + user_profile.phone
     
     call = client.calls.create(to=phone, from_=settings.TWILIO_DEFAULT_CALLERID,
-                               url="http://pickupconnect-staging.djangozoom.net/twiml-response?user_id=%s" %request.user.id)
+                               url="http://pickupconnect-staging.djangozoom.net/twiml-response/?user_id=%s" %request.user.id)
     
     # Steve: 6172901329
     # John: 6262721760  #6175174953
