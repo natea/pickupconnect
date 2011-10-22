@@ -23,7 +23,7 @@ My contacts
             <tbody>
             {% for c in contact_list %}
             <tr>
-                <td><a href="./{{ c.id }}/">{% famfam_silk 'user' %} {{c.name}}</a></td>
+                <td><a href="{% url contact contact_id=c.id %}">{% famfam_silk 'user' %} {{c.name}}</a></td>
                 <td>{{ c.phone }}</td>
                 <td>{{ c.twitter }}</td>
                 <td>{{ c.birthday }}</td>
