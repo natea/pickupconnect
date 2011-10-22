@@ -1,4 +1,4 @@
-{% load i18n %}<!--
+{% load i18n %}
 <ul class="secondary-nav">
     <li>
     {% if user.is_authenticated %}
@@ -18,4 +18,4 @@
     <li><a href="{% url userena_signin %}"><span>{% trans 'Log in' %}</span></a></li>
     <li><a href="{% url userena_signup %}"><span>{% trans 'Sign up' %}</span></a></li>
     {% endif %}
-</ul>-->
+</ul>
