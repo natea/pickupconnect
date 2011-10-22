@@ -3,7 +3,6 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic import TemplateView
 
-
 from userena import views as userena_views
 from callforme import forms as callforme_forms
 from callforme import views as callforme_views
@@ -19,16 +18,16 @@ This is a test.
 urlpatterns = patterns('',
     # Examples:
     # 
-    
-
+        
     #url(r'^$', 'callforme.views.home', name='home'),
     url(r'^$', direct_to_template,
         {'template': 'index.html'}, name='home'),  
 
 
-#    url(r'^contacts/', 'callforme.views.contacts', name='contacts'),
-#    url(r'^contacts/new/$', 'callforme.views.add_contact', name="add-contact"),
-#    url(r'^contacts/(?P<contact_id>\d+)/$', 'contact', name="contact-detail"),
+    url(r'^contacts/new/$', 'callforme.views.add_contact', name="add-contact"),
+    url(r'^contacts/(?P<contact_id>\d+)/$', 'contact', name="contact-detail"),
+    url(r'^contacts/', 'callforme.views.contacts', name='contacts'),
+
 
  #   url(r'^promo/$',
  #       direct_to_template,
@@ -44,15 +43,15 @@ urlpatterns = patterns('',
 
 
 #Deactivating next block til site is finished
-#    url(r'^testsms/$', 'callforme.views.testsms'),
-#    url(r'^sms/$', 'callforme.views.twilio_sms'),
-#    url(r'^call/$', 'callforme.views.twilio_call', name="call"),
-#    url(r'^verify\-phone/$', 'callforme.views.twilio_verify'),
-#    url(r'^twiml\-response/$', 'callforme.views.twiml_response'), 
-#    url(r'^accounts/signup/$',
-#            userena_views.signup,
-#            {'signup_form': callforme_forms.SignupFormCustomized}),
-            #'success_url' : 'callforme.views.twilio_verify'           
+    url(r'^testsms/$', 'callforme.views.testsms'),
+    url(r'^sms/$', 'callforme.views.twilio_sms'),
+    url(r'^call/$', 'callforme.views.twilio_call', name="call"),
+    url(r'^verify\-phone/$', 'callforme.views.twilio_verify'),
+    url(r'^twiml\-response/$', 'callforme.views.twiml_response'), 
+    url(r'^accounts/signup/$',
+           userena_views.signup,
+           {'signup_form': 'callforme_forms.SignupFormCustomized',
+            'success_url' : 'callforme.views.twilio_verify'}),          
     # account stuff using userena
     url(r'^accounts/', include('userena.urls')),
     url(r'^messages/', include('userena.contrib.umessages.urls')),
